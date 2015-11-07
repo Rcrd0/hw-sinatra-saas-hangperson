@@ -779,7 +779,8 @@ variables set up in the `get` or `post` blocks.
 * Self-check: `@game` in this context is an instance variable of what
 class?  (Careful-- tricky!)
 
-> It's an instance variable of the `HangpersonApp` class in the app.rb file.  Remember we are dealing
+> It's an instance variable of the `HangpersonApp` class in the app.rb 
+file. 0 Remember we are dealing
 > with two Ruby classes here: the `HangpersonGame` class encapsulates
 > the game logic itself (that is, the Model in model-view-controller),
 > whereas `HangpersonApp` encapsulates the logic that lets us deliver
@@ -833,12 +834,15 @@ messages in the `session[]` hash?
 Running the Sinatra app
 -----------------------
 
-As before, run the shell command `rackup -p $PORT -o $IP` to start the app, or `rerun "rackup -p $PORT -o $IP"` if you want to rerun the app each time you make a code change.  
+As before, run the shell command `rackup -p $PORT -o $IP` to start the app, 
+or `rerun "rackup -p $PORT -o $IP"` if you want to rerun the app each time you make 
+a code change.  
 
 * Self-check: based on the output from running this command, what is the
 full URL you need to visit in order to visit the New Game page?
 
-> The web server connected to Sinatra is running on Cloud9, so the first part of the URL is something like `http://your-workspace-name.c9.io`.
+> The web server connected to Sinatra is running on Cloud9, so the first part of the URL
+is something like `http://your-workspace-name.c9.io`.
 > The Ruby code `get '/new' do...` in `app.rb` renders the New Game
 > page, so the full URL is in the form `http://your-workspace-name.c9.io/new`.
 
@@ -859,10 +863,18 @@ Let's get our app onto Heroku.
 * Next, type `git add -A` to stage all changed files (including Gemfile.lock)
 * Then type `git commit -am"Ready for Heroku!"` to commit all local changes on Cloud9.
 * Next, type `heroku login` and authenticate.
-* Since this is the first time we're telling Heroku about the Hangperson app, we must type `heroku create` to have Heroku prepare to recieve this code and to have it create a git reference for referencing the new remote repository. 
+* Since this is the first time we're telling Heroku about the Hangperson app, we must 
+* type `heroku create` to have Heroku prepare to recieve this code and to have it 
+* create a git reference for referencing the new remote repository. 
 * Then, type `git push heroku master` to push your Cloud9 code to Heroku. 
-* When you want to update Heroku later, you only need to commit your changes to git locally in Cloud9, then push to Heroku as in the last step. 
-* Verify that the Heroku-deployed Hangperson behaves the same as your development version before continuing. A few lines up from the bottom of the Heroku output in the Cloud9 terminal should have a URL ending in herokuapp.com. Find that, copy it to the clipboard, and paste it into a new browser tab to see the current app. The Cloud9 IDE browser tab won't render the app properly, so use a new browser tab outside of Cloud9.
+* When you want to update Heroku later, you only need to commit your changes to git 
+* locally in Cloud9, then push to Heroku as in the last step. 
+* Verify that the Heroku-deployed Hangperson behaves the same as your development 
+* version before continuing. A few lines up from the bottom of the Heroku output in 
+* the Cloud9 terminal should have a URL ending in herokuapp.com. Find that, copy it 
+* to the clipboard, and paste it into a new browser tab to see the current app. 
+* The Cloud9 IDE browser tab won't render the app properly, so use a new browser 
+* tab outside of Cloud9.
 * Verify the broken functionality by clicking the new game button.
 
 
@@ -963,7 +975,8 @@ Run the "new game" scenario with:
 ```bash
 cucumber features/start_new_game.feature
 ```
-If you get an error about Cucumber like this one, just follow the advice and run `bundle install` first.
+If you get an error about Cucumber like this one, just follow the advice and 
+run `bundle install` first.
 ```bash
 ~/workspace/hw-sinatra-saas-hangperson (master) $ cucumber features/start_new_game.feature
 Could not find proper version of cucumber (2.0.0) in any of the sources
@@ -973,7 +986,9 @@ Run `bundle install` to install missing gems.
 The scenario fails because the `<form>` tag in `views/new.erb` is incorrect and incomplete in the
 information that tells the browser what URL to post the form to.  Based
 on the table of routes we developed in an earlier section, fill in the
-`<form>` tag's attributes appropriately. You can inspect what happens for various routes in app.rb, but you don't need to edit this file yet.  (Hint: if you get stuck, take a look at `show.erb` (at the bottom) for a similar example of a filled in form tag.)
+`<form>` tag's attributes appropriately. You can inspect what happens for various 
+routes in app.rb, but you don't need to edit this file yet.  (Hint: if you get stuck, 
+take a look at `show.erb` (at the bottom) for a similar example of a filled in form tag.)
 
 The create-new-game code in the Sinatra app should do the following:
 
@@ -1045,7 +1060,8 @@ In the `guess` code in the Sinatra app.rb file, you should:
 * Redirect to the `show` action so the player can see the result of
 their guess. (done for you as well)
 
-While you're here, read the comments in the file. They give clues for future steps in this assignment.
+While you're here, read the comments in the file. They give clues for future steps 
+in this assignment.
 
 When finished adding that code, verify that all the steps in
 `features/guess.feature` now pass by running cucumber for that .feature file.
