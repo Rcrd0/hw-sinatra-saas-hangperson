@@ -3,6 +3,8 @@
 <p>
   The word was
   <span class="win"><%= @game.word %></span>.
+  
 </p>
+<h2> win or lose = <%= @game.check_win_or_lose.to_s %> </h2>
 
 <%= erb :new %>

@@ -31,6 +31,7 @@ class HangpersonApp < Sinatra::Base
     # NOTE: don't change previous line - it's needed by autograder!
 
     @game = HangpersonGame.new(word)
+    rs = @game.check_win_or_lose().to_s
     redirect '/show'
   end
   
@@ -40,6 +41,8 @@ class HangpersonApp < Sinatra::Base
   post '/guess' do
 
     letter = params[:guess].to_s[0]
+    rs = @game.check_win_or_lose().to_s
+    
     ### YOUR CODE HERE ###
     begin
       new_letter = @game.guess(letter)
@@ -61,19 +64,20 @@ class HangpersonApp < Sinatra::Base
   # wrong_guesses and word_with_guesses from @game.
   get '/show' do
     ### YOUR CODE HERE ###
-    rs = @game.check_win_or_lose
-    if rs == :lose #:lose
+    rs = @game.check_win_or_lose().to_s
+    if rs == "lose" #:lose
       redirect '/lose' 
-    elsif rs == :win  
+    elsif rs == "win"  
       redirect '/win'
-    else #  == :play
+    else #  == "play"
       erb :show # You may change/remove this line
     end
   end
   
   get '/win' do
     ### YOUR CODE HERE ###
-    if @game.check_win_or_lose == :win
+    rs = @game.check_win_or_lose().to_s
+    if rs == "win"
       erb :win # You may change/remove this line
     else
       redirect '/show'
@@ -83,7 +87,8 @@ class HangpersonApp < Sinatra::Base
   
   get '/lose' do
     ### YOUR CODE HERE ###
-    if @game.check_win_or_lose == :lose
+    rs = @game.check_win_or_lose().to_s
+    if rs == "lose"
       erb :lose # You may change/remove this line
     else
       redirect '/show'

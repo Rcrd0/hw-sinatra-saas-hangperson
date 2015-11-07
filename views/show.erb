@@ -16,6 +16,8 @@
   <span class="word"><%= @game.word_with_guesses %></span>
 </p>
 
+<h2> win or lose = <%= @game.check_win_or_lose.to_s %> </h2>
+    
 <form action="/guess" method="post">
   <input type="text" size="1" name="guess" autocomplete="off"/>
   <input type="submit" value="Guess!"/>
