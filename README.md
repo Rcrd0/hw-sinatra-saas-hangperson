@@ -134,7 +134,9 @@ git commit -am "Set up the Gemfile"
 ```
 The first command stages all changed files for committing.
 The second command commits the staged files with the comment in the quotes.
-You can repeat these commands to commit future changes. Remember that these are LOCAL commits -- if you want these changes on GitHub, you'll need to do a git push command, which we will show later.
+You can repeat these commands to commit future changes. Remember that these 
+are LOCAL commits -- if you want these changes on GitHub, you'll need to do
+a git push command, which we will show later.
 
 
 * What's the difference between the purpose and contents of `Gemfile`
@@ -226,7 +228,8 @@ that our `app` file is located in the current directory (.) because
 `require` normally looks only in standard system directories to find
 gems.
 
-If you're using Cloud9, you're now ready to test-drive our simple app with this command line:
+If you're using Cloud9, you're now ready to test-drive our simple 
+app with this command line:
 
 ```bash
 rackup -p $PORT -o $IP
@@ -234,10 +237,14 @@ rackup -p $PORT -o $IP
 
 This command starts the Rack appserver and the WEBrick webserver.  Rack
 will look for `config.ru` and attempt to start our app based on the
-information there.  If you're using Cloud9, you will see a small popup in the terminal with a URL to your running webapp. It will open in a new tab in the IDE if you click on it, but you should open up a fresh browser tab and paste in that URL.
+information there.  If you're using Cloud9, you will see a small popup 
+in the terminal with a URL to your running webapp. It will open in a new 
+tab in the IDE if you click on it, but you should open up a fresh browser
+tab and paste in that URL.
 
 
-Point a new Web browser tab at the running app's URL and verify that you can see "Hello World".
+Point a new Web browser tab at the running app's URL and verify that you 
+can see "Hello World".
 
 * What happens if you try to visit a non-root URL such as
 `https://workspace-username.c9.io/hello` and why? (your URL root will vary)
@@ -258,18 +265,30 @@ Modify the app
 --------------
 
 Modify `app.rb` so that instead of "Hello World" it prints "Goodbye World".
-Save your changes to `app.rb` and try refreshing your browser tab where the app is running.  
+Save your changes to `app.rb` and try refreshing your browser tab where 
+the app is running.  
 
 No changes? Confused?
 
 Now go back to the shell window where you ran `rackup`
-and press Ctrl-C to stop Rack.  Then type `rackup -p $PORT -o $IP` again (for Cloud9), and once it is running, go back to
-your browser tab with your app and refresh the page.  This time it should work.
+and press Ctrl-C to stop Rack.  Then type `rackup -p $PORT -o $IP` again 
+(for Cloud9), and once it is running, go back to your browser tab with 
+your app and refresh the page.  This time it should work.
 
 What this shows you is that if you modify your app while it's running,
-you have to restart Rack in order for it to "see" those changes. Since restarting it manually is tedious, we'll use the rerun gem, which restarts Rack automatically when it sees changes to files in the app's directory. (Rails does this for you by default during development, as we'll see, but Sinatra doesn't.)
+you have to restart Rack in order for it to "see" those changes. Since 
+restarting it manually is tedious, we'll use the rerun gem, which restarts
+Rack automatically when it sees changes to files in the app's directory. 
+(Rails does this for you by default during development, as we'll see, 
+but Sinatra doesn't.)
 
-You're probably already thinking: "Aha! If our app depends on this additional gem, we should add it to the Gemfile and run bundle to make sure it's really present." Good thinking. But it may also occur to you that this particular gem wouldn't be necessary in a production environment: we only need it as a tool while developing. Fortunately, there's a way to tell Bundler that some gems are only necessary in certain environments. Add the following to the Gemfile (it doesn't matter where):
+You're probably already thinking: "Aha! If our app depends on this additional
+gem, we should add it to the Gemfile and run bundle to make sure it's really
+present." Good thinking. But it may also occur to you that this particular
+gem wouldn't be necessary in a production environment: we only need it as
+a tool while developing. Fortunately, there's a way to tell Bundler that 
+some gems are only necessary in certain environments. Add the following 
+to the Gemfile (it doesn't matter where):
 
 ```bash
 group :development do
@@ -277,29 +296,55 @@ group :development do
 end
 ```
 
-Any gem specifications inside the group :development block will only be examined if bundle is run in the development environment. (The other environments you can specify are :test and :production, and you can define new environments yourself.) Gem specifications outside of any group block are assumed to apply in all environments.
+Any gem specifications inside the group :development block will only be 
+examined if bundle is run in the development environment. (The other 
+environments you can specify are :test and :production, and you can define 
+new environments yourself.) Gem specifications outside of any group block 
+are assumed to apply in all environments.
 
-Say `rerun "rackup -p $PORT -o $IP"` in the terminal window to start your app and verify the app is running. NOte that you need to put everything except `rerun` in quotes in order to make the command unambiguous in Cloud9. Now any detected changes will cause the server to restart automatically, similar to `autotest` for rspec.
+Say `rerun "rackup -p $PORT -o $IP"` in the terminal window to start your 
+app and verify the app is running. NOte that you need to put everything 
+except `rerun` in quotes in order to make the command unambiguous in Cloud9. 
+Now any detected changes will cause the server to restart automatically, 
+similar to `autotest` for rspec.
 
-Modify app.rb to print a different message, and verify that the change is detected by rerun by again refreshing your browser tab with the running app.
+Modify app.rb to print a different message, and verify that the change is 
+detected by rerun by again refreshing your browser tab with the running 
+app.
 
 Deploy to Heroku
 ----------------
-Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our Sinatra (and later Rails) applications in a more robust way than via Cloud9. If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the next step.
+Heroku is a cloud platform-as-a-service (PaaS) where we can deploy our 
+Sinatra (and later Rails) applications in a more robust way than via Cloud9. 
+If you don't have an account yet, go sign up at http://www.heroku.com. 
+You'll need your login and password for the next step.
 
-If using Cloud9, update your Heroku Toolbelt installation by typing the following command:
+If using Cloud9, update your Heroku Toolbelt installation by typing the 
+following command:
 `wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh`
 
-Log in to your Heroku account by typing the command: `heroku login` in the Cloud9 terminal. This will connect your Cloud9 workspace to your Heroku account.
+Log in to your Heroku account by typing the command: `heroku login` in the 
+Cloud9 terminal. This will connect your Cloud9 workspace to your Heroku 
+account. (rp@gmail)
 
-While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in Heroku. This will tell the Heroku service to prepare for some incoming code, and locally on Cloud9, it will add a remote git repository for you called `heroku`.
+While in the root directory of your project (not your whole workspace), 
+type `heroku create` to create a new project in Heroku. This will tell the
+Heroku service to prepare for some incoming code, and locally on Cloud9, 
+it will add a remote git repository for you called `heroku`.
 
-Next, make sure you stage and commit all changes locally as instructed above (i.e. git add, git commit, etc).
+Next, make sure you stage and commit all changes locally as instructed above
+(i.e. git add, git commit, etc).
 
-Then, you will push your local Cloud9 git repo (called master) to Heroku, which is now ready for you:
+Then, you will push your local Cloud9 git repo (called master) to Heroku, 
+which is now ready for you:
 `git push heroku master`
 
-This will create a running instance of your app at some URL ending with herokuapp.com. Enter that URL in a new browser tab (not in the Cloud9 IDE) to see your app running live. You did it!
+This will create a running instance of your app at some URL ending with 
+herokuapp.com. Enter that URL in a new browser tab (not in the Cloud9 IDE)
+to see your app running live. You did it!
+
+https://guarded-castle-9033.herokuapp.com/goodbye
+
 
 Summary
 -------
@@ -313,7 +358,11 @@ versions of gems actually in use.
 this file in `config.ru`, and used `rackup` to start the appserver and
 the WEBrick web server.
 
-* You learned that changing the app's code doesn't automatically cause Rack to reload the app. To save the work of restarting the app manually every time you make a change, you used the `rerun` gem, adding it to the Gemfile in a way that specifies you won't need it in production, only during development.
+* You learned that changing the app's code doesn't automatically cause Rack
+* to reload the app. To save the work of restarting the app manually every 
+* time you make a change, you used the `rerun` gem, adding it to the Gemfile
+* in a way that specifies you won't need it in production, only during 
+* development.
 
 * You versioned the important files containing not only your app's code
 but the necessary info to reproduce all the libraries it relies on and
@@ -324,9 +373,11 @@ the file that starts up the app.
 
 Part 1: Hangperson
 ===========================================================================
-With all this machinery in mind, fork this repo into your github account, clone it into Cloud9, and let's work on Hangperson.
+With all this machinery in mind, fork this repo into your github account, 
+clone it into Cloud9, and let's work on Hangperson.
 
 `git clone <insert the clone url from your github fork of this repo here>`
+`git clone https://github.com/Rcrd0/hw-sinatra-saas-hangperson.git`
 
 Developing Hangperson Using TDD and Autotest
 --------------------------------------------
