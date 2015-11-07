@@ -13,6 +13,7 @@ class HangpersonGame
     @word = word
     @guesses = ''
     @wrong_guesses = ''
+    @num_guesses = 0
   end
   attr_accessor :word
   attr_accessor :guesses
@@ -29,12 +30,12 @@ class HangpersonGame
     raise ArgumentError.new("nil argument") if letter.nil?
     raise ArgumentError.new("empty string") if letter == ''
     raise ArgumentError.new("not a letter") unless (letter =~ /^[A-Za-z]/) == 0
-    return false unless self.check_win_or_lose == :play
-    
+    #return false unless self.check_win_or_lose == :play
     letter.downcase!
     return false if (@guesses+@wrong_guesses).include? letter
       #debugger  
-    
+    @num_guesses += 1
+    return true unless @num_guesses < 7
     if @word.include? letter
       @guesses += letter
     else
@@ -51,8 +52,7 @@ class HangpersonGame
   end
   
   def check_win_or_lose
-    num_tries =  @guesses.length+@wrong_guesses.length
-    return :lose if num_tries >= 7
+    return :lose if @num_guesses >= 7
     if @word == word_with_guesses
       return :win
     else
