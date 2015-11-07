@@ -660,7 +660,8 @@ game."  So we can add another row to our table of routes:
 <table>
 <tbody>
 <tr>
-<td>`GET /new`   </td><td>  give human user a chance to start new game </td><td> display a form that includes a "start new game"  button  </td>
+<td>`GET /new`   </td><td>  give human user a chance to start new game </td>
+<td> display a form that includes a "start new game"  button  </td>
 </tr>
 </tbody>
 </table>
