@@ -34,12 +34,12 @@ class HangpersonGame
     letter.downcase!
     return false if (@guesses+@wrong_guesses).include? letter
       #debugger  
-    @num_guesses += 1
     return true unless @num_guesses < 7
     if @word.include? letter
       @guesses += letter
     else
       @wrong_guesses += letter
+      @num_guesses += 1
     end
     return true
   end
